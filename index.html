@@ -7,55 +7,80 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body ng-app="myApp" ng-controller="myCtrl">
+  {{ anusha }}
 <div class=" logincss">
    <ul class="nav nav-tabs">
                   <li class="active"><a href="#login" data-toggle="tab"> Login </a></li>
                   <li><a href="#signup" data-toggle="tab"> Signup </a></li>
                </ul><br>
-               <form class="form-horizontal" id="validateForm">
+               <form class="form-horizontal" id="validateForm" name="form" novalidate>
               <div class="tab-content">
                 <div id="login" class="tab-pane fade in active">
                 <h2><center>Login</center></h2><hr>
+
+
                 <div class="input-group">
                   <span class="input-group-addon">
                  <i class="glyphicon glyphicon-user"></i></span>
-                  <input type ="text"  placeholder ="Enter User Name" class="form-control" ng-model="uname" id="uname" required>
-                </div><br>
+                  <input type ="text" name="name" placeholder ="Enter User Name" class="form-control" ng-model="uname" ng-model-options="{updateOn:'blur'}" id="uname" pattern="^[a-z0-9_-]{5,10}$" required>
+                </div>
+                <div class="error-message"
+         ng-show="form.name.$invalid && !form.name.$pristine">
+        We need a name with 5 chars or more.
+    </div>
+    <br>
+
+
                 <div class="input-group">
                   <span class="input-group-addon">
                    <i class="glyphicon glyphicon-lock"></i></span>
-                  <input type ="password"  placeholder ="Enter Password" class="form-control" ng-model="pwd" id="pwd" required>
-                </div> <br>
+                  <input type ="password"  placeholder ="Enter Password" class="form-control" ng-model-options="{updateOn:'blur'}" ng-model="pwd" id="pwd" pattern=".{5,}" required>
+                </div> 
+                <div class="error-message"
+         ng-show="form.password.$invalid && !form.password.$pristine">
+        Passwords must have at least 5 chars.
+    </div>
+
+                <br>
+
+
                 <div  class="checkbox">
                   <label><input type="checkbox" checked> Remember me</label>
                   </div>
                   <a href="#forgot" data-toggle="modal"><span></span> Forgot Password</a>
                   <button class="btn btn-primary pull-right" ng-click="login()">Login</button>
                     </div>
+
               <div id="signup" class="tab-pane fade">
                 <h2><center>Sign Up</center></h2><hr>
                 <div class="input-group">
                   <span class="input-group-addon">
                  <i class="glyphicon glyphicon-user"></i></span>
-                 <input type="text" class="form-control" placeholder="Enter User name" ng-model ="unamer"  required>
-                </div> <br>
+                 <input type="text" class="form-control" placeholder="Enter User name" ng-model ="unameR" id ="uname1" pattern="[a-z]{3}" required>
+                </div>
+
+                 <br>
                 <div class="input-group">
                   <span class="input-group-addon">
                  <i class="glyphicon glyphicon-envelope"></i></span>
-                 <input type="text" class="form-control" placeholder="Enter your Email Id"  ng-model ="emailr" id="email1" required>
-                </div> <br>
+                 <input type="text" class="form-control" placeholder="Enter your Email Id"  ng-model ="emailR" id="email1" pattern="[a-z]{3}" ng-model-options="{updateOn:'blur'}" required>
+
+                </div>
+                <div class="error-message"
+         ng-show="form.email.$invalid && !form.email.$pristine">
+        We need a valid e-mail address.
+    </div>
+
+                 <br>
                 <div class="input-group">
                   <span class="input-group-addon">
                    <i class="glyphicon glyphicon-lock"></i></span>
-                  <input type ="password"  placeholder ="Enter Password" class="form-control"  ng-model ="pwdr" id="pwd1"  required>
-                </div> <br>
-                <div class="input-group">
-                  <span class="input-group-addon">
-                   <i class="glyphicon glyphicon-lock"></i></span>
-                  <input type ="text"  placeholder ="Enter id" class="form-control"  ng-model ="idr" id="pwd1"   required>
-                </div> <br>
-                 <button type="submit" class="btn btn-primary pull-right" ng-click="register()">Register</button>
-              </div>
+                  <input type ="password"  placeholder ="Enter Password" class="form-control" ng-model-options="{updateOn:'blur'}" ng-model="pwd" id="pwd" pattern=".{2,}" required>
+                </div> 
+                <div class="error-message"
+         ng-show="form.password.$invalid && !form.password.$pristine">
+        Passwords must have at least 2 chars.
+    </div>
               </form>
               <div class="modal fade" id="forgot">
                <div class="modal-dialog">

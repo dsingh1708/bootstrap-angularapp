@@ -1,16 +1,17 @@
 var app = angular.module('myApp', []);
 app.controller('myCtrl', function($scope,$http) {
-    $scope.register = function() {
-        var payload = {      
-          unameR:$scope.unamer,
-          emailR:$scope.emailr,
-          pwdR:$scope.pwdr,
-          id:$scope.idr 
-        };       
+
+    $scope.post = function() {
+        var payload = {
+          name:$scope.unameR,
+          email:$scope.emailR,
+          pwd:$scope.pwdR
+        };
 
 $http({
   method: 'POST',
-  url: 'http://localhost:8086/Postuser',
+ url: 'http://localhost:8086/Getuser',
+  // url: 'http://localhost:8086/Postbird',
   data:payload,
   headers:{'Content-Type': 'application/json'},
 }).then(function successCallback(response) {
@@ -18,8 +19,7 @@ $http({
       console.log(JSON.stringify(response.data));
       console.log(response.status);
       console.log(response.statusText);
-      console.log(response.statusText);
-      alert('Registered Sucessfully');
+      alert('Success');
 
   }, function errorCallback(response) {
       console.log("Entered in errorCallback ");
@@ -29,34 +29,25 @@ $http({
 });   
       };
 
-          $scope.login = function() {
-$http({
-  method: 'GET',
-  url: 'http://localhost:8086/Getuser',
 
-  headers:{'Content-Type': 'application/json'},
-}).then(function successCallback(response) {
-      console.log("Entered in successCallback ");
-      console.log(JSON.stringify(response.data));
-      console.log(response.status);
-      console.log(response.statusText);
-      console.log(response.statusText);
-      $scope.birdsapi = response.data;
-      for (var i=0;i<($scope.birdsapi.Data).length;i++){
+      // var strongRegularExp = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+      // var mediumRegularExp = new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})");
 
-      if (($scope.uname == $scope.birdsapi.Data[i].unamer) && ($scope.pwd == $scope.birdsapi.Data[i].pwdr) ){
-      alert('Logged in Sucessfully ');
-    }
-        
-  }
+      // $scope.checkpwdStrength = {
+      //   "width": "150px",
+      //   "height": "25px",
+      //   "float": "right"
+      // };
 
-  }, function errorCallback(response) {
-      console.log("Entered in errorCallback ");
-      console.log(response.xhrStatus);
-      console.log(response.status);
-      console.log(response.statusText);
-});   
-      };
+      // $scope.validationInputPwdText = function(value) {
+      //   if (strongRegularExp.test(value)) {
+      //     $scope.checkpwdStrength["background-color"] = "green";
+      //   } else if (mediumRegularExp.test(value)) {
+      //     $scope.checkpwdStrength["background-color"] = "orange";
+      //   } else {
+      //     $scope.checkpwdStrength["background-color"] = "red";
+      //   }
+      // };
 });
 
 
@@ -88,4 +79,40 @@ $http({
 //     }
 
 // }
+
+// function Validate(uname)
+// {
+//   uname.value=uname.value.replace(/[^a-zA-Z-'\n\r.]+/g, '');
+// }
+
+// function eValidate(email)
+// {
+//   var regMail=/^([_a-zA-Z0-9-]+)(\.[_a-zA-Z0-9-]+)*@([a-zA-Z0-9-]+\.)+([a-zA-Z]{2,3})$/;
+
+
+//   if (regMail.test(email)==false)
+//   {
+//     document.getElementById("status").innerHTML="<span class='warning'>Email not valid</span>";
+//   }
+//   else{
+//     document.getElementById("status").innerHTML="<span class='valid'>you Entereda valid Password</span>";
+//   }
+// }
+
+// function pwdValidate(pwd)
+// {
+// var regPwd=/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20}/;
+// {
+//   if (regPwd.test(pwd)==false)
+//   {
+//     document.getElementById("statusPWD").innerHTML="<span class='warning'>please follow the pattern: afghgh1A@</span>";
+//   }
+//   else
+//   {
+//     document.getElementById("statusPWD").innerHTML="<span class='valid'></span>";
+//   }
+//   }
+// }
+
+
 
